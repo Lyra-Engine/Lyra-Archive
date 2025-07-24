@@ -3,6 +3,9 @@ languageCode = "en-us"
 title = "Lyra Engine"
 theme = "hugo-narrow"
 
+[caches.images]
+dir = ":cacheDir/images"
+
 [params]
 showThemeSwitch = true
 showDarkModeSwitch = true
