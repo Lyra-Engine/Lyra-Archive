@@ -1,0 +1,157 @@
+baseURL = "https://example.org/"
+languageCode = "en-us"
+title = "Lyra Engine"
+theme = "hugo-narrow"
+
+[params]
+showThemeSwitch = true
+showDarkModeSwitch = true
+showLanguageSwitch = false
+colorScheme = "default"
+hasCJKLanguage = true
+enableEmoji = true
+stickyHeader = true
+
+[params.permalinks]
+posts = "/posts/:slug/"
+pages = "/:slug/"
+
+[params.pagination]
+pagerSize = 6
+path = "page"
+
+[params.taxonomies]
+category = "categories"
+tag = "tags"
+
+[params.home]
+recentPostsCount = 5
+
+[params.post]
+showRelated = true
+relatedPostsCount = 3
+
+[params.comments]
+enabled = true
+system = "giscus"
+
+[params.comments.giscus]
+repo = "Lyra-Engine/Lyra-Engine"
+repoId = "R_kgDOO2gwLg"
+category = "General"
+categoryId = "DIC_kwDOO2gwLs4CrEaf"
+mapping = "pathname"
+strict = "0"
+reactionsEnabled = "1"
+emitMetadata = "0"
+inputPosition = "bottom"
+theme = "preferred_color_scheme"
+lang = "en"
+
+[params.comments.utterances]
+repo = "Lyra-Engine/Lyra-Engine"
+issueTerm = "pathname"
+label = "comment"
+theme = "preferred-color-scheme"
+
+[params.comments.twikoo]
+envId = ""
+region = "ap-shanghai"
+path = ""
+lang = "zh-CN"
+
+[params.themes.default]
+name = "Default"
+order = 1
+
+[params.themes.claude]
+name = "Claude"
+order = 2
+
+[params.themes.bumblebee]
+name = "Bumblebee"
+order = 3
+
+[params.themes.emerald]
+name = "Emerald"
+order = 4
+
+[params.themes.nord]
+name = "Nord"
+order = 5
+
+[params.themes.sunset]
+name = "Sunset"
+order = 6
+
+[params.themes.abyss]
+name = "Abyss"
+order = 7
+
+[params.themes.dracula]
+name = "Dracula"
+order = 8
+
+[params.outputs]
+home = [ "HTML", "RSS", "JSON", "WebAppManifest" ]
+
+[params.readingProgress]
+enabled = true
+height = 3
+showOnHomepage = false
+smoothScroll = true
+hideOnComplete = false
+
+[[menus.main]]
+name = "nav.posts"
+pageRef = "/posts"
+weight = 20
+params = { icon = "posts" }
+
+[[menus.main]]
+name = "nav.categories"
+pageRef = "/categories"
+weight = 30
+params = { icon = "categories" }
+
+[[menus.main]]
+name = "nav.tags"
+pageRef = "/tags"
+weight = 40
+params = { icon = "tags" }
+
+[[menus.main]]
+name = "nav.archives"
+pageRef = "/archives"
+weight = 50
+params = { icon = "archive" }
+
+[[menus.footer]]
+name = "About"
+pageRef = "/about"
+weight = 10
+params = { icon = "about" }
+
+[[menus.footer]]
+name = "Contact"
+url = "https://google.com"
+weight = 20
+params = { icon = "contact" }
+
+[[menus.footer]]
+name = "RSS Feed"
+url = "/index.xml"
+weight = 30
+params = { icon = "rss" }
+
+[[menus.social]]
+name = "GitHub"
+url = "https://github.com/Lyra-Engine"
+weight = 10
+params = { icon = "github" }
+
+[[menus.social]]
+name = "Email"
+url = "mailto:tianyucheng@utexas.edu"
+weight = 20
+params = { icon = "email" }
