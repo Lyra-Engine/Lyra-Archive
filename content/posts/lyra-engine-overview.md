@@ -1,5 +1,5 @@
 +++
-date = '2025-07-20T09:00:00-05:00'
+date = '2025-07-20T08:00:00-05:00'
 draft = false
 title = 'Lyra Engine Overview'
 

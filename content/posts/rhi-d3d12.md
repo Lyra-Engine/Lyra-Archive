@@ -50,7 +50,17 @@ Personally I prefer the clear distinction between different types of objects.
 
 ## Samplers
 
-In D3D12, samplers are regular descriptors.
+In D3D12, samplers are regular descriptors. Sampler descriptors are managed
+in a separate descriptor heap. Under the abstraction of a `GPUSampler` object,
+these sampler descriptors are never reset unless being manually destroyed.
+
+A major difference in sampler between D3D12 and WebGPU/Vulkan is, since samplers
+are already descriptors, they can be directly bound during command recording.
+We are explicitly not using this feature, because D3D12 requires heap to also
+be bound in command buffer. The heaps used by command buffers are pertained to
+frames, while the sampler heap used for sampler declaration is owned by `RHI`
+object itself. As a common practice, we will allocate a sampler descriptor on
+the frame heap, and copy the sampler descriptor over.
 
 ## Layout
 
@@ -79,3 +89,26 @@ more flexible design on the descriptor management, but also has some limitations
 major limitation is that sampler is separated from rest of the descriptor types.
 Therefore, each frame manages two separate descriptor heaps and will be reset upon
 frame starts.
+
+The sampler heap has a limit of 2048, which should be big enough for most of the applications.
+The heap for other descriptors has a much larger limit because this heap holds all other resources,
+including buffers and textures.
+
+Our command buffer will bind the two frame heaps on the start. Throughout the life time of this
+command buffer, we will stick to only these two heaps for the ease of heap management.
+
+## Descriptor Handle
+
+Each descriptor handle represents a group of shader inputs. The group of shader inputs,
+according to the bind group layout, could contain buffers, textures, samplers, etc.
+
+Note that I have just mentioned samplers needs to be allocated from a separate heap.
+This means we have to record multiple descriptor handles: one for cbv/uav/srv, and the
+other for samplers. In addition, because dynamic uniform/storage buffers are handled
+separately from rest of the descriptors, we also need to separately record a handle for
+them. This means another 4-8 bytes of storage.
+
+For descriptor handles, every byte counts because there will be a ton of descriptors used
+in applications. Therefore I only record the offset from the base heap. In total there
+are 3 uint offsets recorded (16 bytes). Ideally we want 8 bytes, but this is by far what
+I can come up with.
