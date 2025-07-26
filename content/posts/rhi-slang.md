@@ -1,10 +1,10 @@
 +++
-date = '2025-07-20T09:00:00-05:00'
+date = '2025-07-21T09:00:00-05:00'
 draft = false
 title = 'RHI: Slang'
 
 categories = ["Blog"]
-tags = ["RHI", "Shader", "Slang", "Tutorial"]
+tags = ["RHI", "Shader", "Slang"]
 
 mermaid = true
 comments = true
@@ -37,7 +37,7 @@ purely using `ParameterBlock` suffices the need of our RHI API.
 Although slang supports regular `[[vk::binding]]` and `register()` annotations,
 the official documentation recommends using `ParameterBlock` over manual annotations.
 
-## API
+## API Design
 
 Following is my tentative API design for shader compiler, including both compilation
 and reflection:
@@ -189,5 +189,5 @@ as we write more applications in the future.
 
 ## References
 
-[Compilation API](https://shader-slang.org/docs/compilation-api/)
-[Reflection API](https://shader-slang.org/slang/user-guide/reflection)
+- [Compilation API](https://shader-slang.org/docs/compilation-api/)
+- [Reflection API](https://shader-slang.org/slang/user-guide/reflection)

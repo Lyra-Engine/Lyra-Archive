@@ -66,3 +66,23 @@ engine, this is not a problem.
 The Vulkan backend adopts a frame-based resource management mechanism. Descriptors
 will be only be good for the current frame. Each frame maintains descriptor pools,
 and the pools will be reset before the frame starts.
+
+## Render Pass
+
+Vulkan has this specific notion of pre-creating a render pass object. This is the
+part I found most tedious about Vulkan. Creating a graphics pipeline requires a
+compatible render pass, but this is totally bogus because pipeline object in theory
+should not need the render pass. Additionally VkFramebuffer also needs a render pass
+during creation. Most of the time these render pass are just a placeholder, using
+a compatible render pass object would be totally fine, but this introduces additional
+complexity.
+
+Vulkan 1.1 introduced imageless framebuffer. Vulkan 1.2 introduced dynamic rendering.
+Using these two extensions, I can get rid of render pass and framebuffer objects completely.
+Render pass are created on the fly, similar to how D3D12 is handling render passes.
+
+There is one caveat, though, for subpasses. VkRenderPass was designed in a complicated
+way to handle multiple subpasses. This is due to different handling on hardware vendors
+for use cases like GBuffer. Mobile GPU uses TBDR, which will suffer from large bandwidth
+transmission from GBUffer. Currently I am targeting only at desktop, so this is a problem
+for future.

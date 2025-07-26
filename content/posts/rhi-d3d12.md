@@ -112,3 +112,11 @@ For descriptor handles, every byte counts because there will be a ton of descrip
 in applications. Therefore I only record the offset from the base heap. In total there
 are 3 uint offsets recorded (16 bytes). Ideally we want 8 bytes, but this is by far what
 I can come up with.
+
+## Buffer to Image Copy Caveats
+
+In testing of a D3D12 feature, I was trying to set up a 4x4 texture programatically using
+buffer copy, but was suprised to see that there is restriction on the minimal row pitch.
+D3D12 requires the minimal row pitch to be 256 bytes. For small 4x4 texture, this is simply
+a waste of space. Lyra-Engine was modified to include this minimal row pitch property for
+other backends in order to achieve compatibility.
